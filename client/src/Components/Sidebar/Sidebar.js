@@ -10,7 +10,9 @@ import {
   withStyles,
 } from "@material-ui/core";
 import { ChevronLeft } from "@material-ui/icons";
+
 import colors from "Components/Styles/Colors";
+import logo from "Assets/vialogo.svg";
 
 const SidebarTabs = withStyles({
   indicator: {
@@ -46,7 +48,7 @@ const SidebarTab = withStyles({
 
 const useStyles = makeStyles((theme) => ({
   logo: {
-    width: "10rem",
+    width: "8rem",
   },
   chevron: {
     color: colors.background,
@@ -67,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     padding: theme.spacing(0, 1),
     height: "6rem",
-    justifyContent: "flex-end",
+    justifyContent: "space-between",
   },
   linkContainer: {
     height: "100%",
@@ -108,7 +110,7 @@ const Sidebar = (props) => {
     >
       <div className={classes.drawerHeader}>
         <Link to="/">
-          <img src="" className={classes.logo} alt="logo" />
+          <img src={logo} className={classes.logo} alt="logo" />
         </Link>
         <IconButton onClick={handleDrawerClose}>
           <ChevronLeft className={classes.chevron} />

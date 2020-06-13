@@ -11,12 +11,17 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     padding: "2rem",
     width: "100%",
-    minHeight: "70vh",
+    minHeight: "60vh",
   },
   title: {
     color: colors.bodyGrey,
     marginBottom: "1rem",
     textTransform: "uppercase",
+  },
+  messageInput: {
+    marginTop: "2rem",
+    padding: "2rem",
+    width: "100%",
   },
   [theme.breakpoints.down("xs")]: {
     paper: {
@@ -34,7 +39,13 @@ const Dashboard = (props) => {
   return (
     <Grid container className={classes.root} alignItems="center">
       <Paper className={classes.paper}>
-        <Typography className={classes.title}>Dashboard</Typography>
+        <Typography className={classes.title}>
+          Full conversation with selected user
+        </Typography>
+        <Grid container></Grid>
+      </Paper>
+      <Paper className={classes.messageInput}>
+        <Typography className={classes.title}>Input for new message</Typography>
         <Grid container></Grid>
       </Paper>
     </Grid>

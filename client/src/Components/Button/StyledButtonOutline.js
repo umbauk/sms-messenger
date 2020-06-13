@@ -6,7 +6,7 @@ import colors from "Components/Styles/Colors";
 const useStyles = makeStyles({
   root: {
     backgroundColor: `${colors.white}`,
-    border: `1px solid ${colors.sideNavigation}`,
+    border: `1px solid ${colors.textGrey}`,
     borderRadius: 7,
     color: `${colors.black}`,
     fontWeight: "bold",
