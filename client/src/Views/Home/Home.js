@@ -70,6 +70,8 @@ const Home = () => {
     }
   }, [context.user]);
 
+  if (context.checkingLoginState) return null;
+
   return (
     <div className={classes.root}>
       {!context.user && (

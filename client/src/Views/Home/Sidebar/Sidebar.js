@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 import {
   makeStyles,
   Drawer,
@@ -25,25 +25,15 @@ const SidebarTab = withStyles({
   root: {
     height: "3rem",
     fontSize: "1rem",
-    fontWeight: 400,
     lineHeight: "14px",
     letterSpacing: "1.16667px",
-    color: colors.background,
     marginBottom: "1rem",
     textTransform: "uppercase",
     width: "100%",
-    borderLeft: `4px solid ${colors.sideNavigation}`,
-  },
-  selected: {
     background: `rgba(87,88,90,0.2)`,
     color: colors.accent,
     borderLeft: `4px solid ${colors.accent}`,
     fontWeight: 600,
-  },
-  wrapper: {
-    alignItems: "flex-start",
-    textAlign: "left",
-    paddingLeft: "1rem",
   },
 })(Tab);
 
@@ -53,9 +43,6 @@ const useStyles = makeStyles((theme) => ({
   },
   chevron: {
     color: colors.background,
-  },
-  links: {
-    position: "fixed",
   },
   drawer: {
     width: (props) => props.sidebarWidth,
@@ -72,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
     height: "6rem",
     justifyContent: "space-between",
   },
-  linkContainer: {
+  threadContainer: {
     height: "100%",
   },
 }));
@@ -82,28 +69,13 @@ const Sidebar = (props) => {
   const {
     menuOpen,
     setMenuOpen,
-    smallDevice,
     threads,
     activeThread,
     setActiveThread,
   } = props;
-  const [active, setActive] = useState("home");
-  const location = useLocation();
-
-  useEffect(() => {
-    const path = location.pathname.match(/(\w+)/);
-    if (path) setActive(path[1]);
-    else setActive("home");
-  }, [location]);
 
   const handleDrawerClose = () => {
     setMenuOpen(false);
-  };
-
-  const handleTabClick = () => {
-    if (smallDevice) {
-      handleDrawerClose();
-    }
   };
 
   const ThreadList = () => {
@@ -142,20 +114,9 @@ const Sidebar = (props) => {
           <ChevronLeft className={classes.chevron} />
         </IconButton>
       </div>
-      <Grid item className={classes.linkContainer}>
-        <SidebarTabs
-          orientation="vertical"
-          value={active}
-          onChange={(e, value) => setActive(value)}
-        >
-          <SidebarTab
-            label="Dashboard"
-            value="home"
-            component={Link}
-            to={`/`}
-            disableRipple
-            onClick={handleTabClick}
-          />
+      <Grid item className={classes.threadContainer}>
+        <SidebarTabs value="home">
+          <SidebarTab label="Conversations" value="home" disableRipple />
         </SidebarTabs>
         <ThreadList />
       </Grid>

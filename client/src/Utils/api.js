@@ -26,4 +26,8 @@ const getAllMessages = async () => {
   return response.data;
 };
 
-export { register, login, getUser, logOutUser, getAllMessages };
+const sendMessage = async (content, customerId) => {
+  return axios.post("/api/messages/send", { content, customerId });
+};
+
+export { register, login, getUser, logOutUser, getAllMessages, sendMessage };

@@ -23,7 +23,7 @@ const Dashboard = (props) => {
   return activeThread ? (
     <Grid container className={classes.root} alignItems="center">
       <MainConversation activeThread={activeThread} />
-      <MessageInput />
+      <MessageInput activeThread={activeThread} />
     </Grid>
   ) : null;
 };

@@ -4,6 +4,7 @@ const TWILIO_PHONE_NO = require("../config/config").twilioPhoneNo;
 
 const client = require("twilio")(TWILIO_SID, TWILIO_AUTH_TOKEN);
 const MessagingResponse = require("twilio").twiml.MessagingResponse;
+const mongoose = require("mongoose");
 const Customer = require("../models/customer");
 
 exports.sendMessage = async (req, res) => {
@@ -11,7 +12,7 @@ exports.sendMessage = async (req, res) => {
 
   try {
     let customer = null;
-    if (mongoose.Types.ObjectId.isValid(id)) {
+    if (mongoose.Types.ObjectId.isValid(customerId)) {
       customer = await Customer.findById(customerId);
     }
 
@@ -20,10 +21,10 @@ exports.sendMessage = async (req, res) => {
         .status(404)
         .json({ error: `Customer with id ${customerId} is not found` });
       return;
-    } else if (customer.ownedBy !== req.user.id) {
-      res
-        .status(500)
-        .json({ error: `Customer with id ${id} is not owned by this user` });
+    } else if (customer.ownedBy != req.user.id) {
+      res.status(500).json({
+        error: `Customer with id ${customerId} is not owned by this user`,
+      });
       return;
     }
 
@@ -40,6 +41,8 @@ exports.sendMessage = async (req, res) => {
       status: message.status,
       fromCustomer: false,
     });
+
+    await customer.save();
 
     res.status(200).json(message);
   } catch (error) {
