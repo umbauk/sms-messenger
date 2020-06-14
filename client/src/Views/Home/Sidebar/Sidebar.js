@@ -13,6 +13,7 @@ import { ChevronLeft } from "@material-ui/icons";
 
 import colors from "Components/Styles/Colors";
 import logo from "Assets/vialogo.svg";
+import Thread from "Views/Home/Sidebar/Thread";
 
 const SidebarTabs = withStyles({
   indicator: {
@@ -78,7 +79,14 @@ const useStyles = makeStyles((theme) => ({
 
 const Sidebar = (props) => {
   const classes = useStyles({ sidebarWidth: props.sidebarWidth });
-  const { menuOpen, setMenuOpen, smallDevice, threads } = props;
+  const {
+    menuOpen,
+    setMenuOpen,
+    smallDevice,
+    threads,
+    activeThread,
+    setActiveThread,
+  } = props;
   const [active, setActive] = useState("home");
   const location = useLocation();
 
@@ -96,6 +104,24 @@ const Sidebar = (props) => {
     if (smallDevice) {
       handleDrawerClose();
     }
+  };
+
+  const ThreadList = () => {
+    if (activeThread) {
+      return threads.map((thread) => {
+        const active = activeThread._id === thread._id ? true : false;
+
+        return (
+          <Thread
+            key={thread._id}
+            thread={thread}
+            setActiveThread={setActiveThread}
+            active={active}
+          />
+        );
+      });
+    }
+    return null;
   };
 
   return (
@@ -131,6 +157,7 @@ const Sidebar = (props) => {
             onClick={handleTabClick}
           />
         </SidebarTabs>
+        <ThreadList />
       </Grid>
     </Drawer>
   );

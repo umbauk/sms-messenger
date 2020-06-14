@@ -2,6 +2,7 @@ import React from "react";
 import { makeStyles, Grid, Paper, Typography } from "@material-ui/core";
 
 import colors from "Components/Styles/Colors";
+import Message from "./Message";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -23,12 +24,21 @@ const useStyles = makeStyles((theme) => ({
 
 const MainConversation = (props) => {
   const classes = useStyles();
+  const { activeThread } = props;
+
   return (
     <Paper className={classes.paper}>
-      <Typography className={classes.title}>
-        Full conversation with selected user
-      </Typography>
-      <Grid container></Grid>
+      <Grid container justify="space-between">
+        <Typography className={classes.title}>{activeThread.name}</Typography>
+        <Typography className={classes.title}>
+          {activeThread.phoneNum}
+        </Typography>
+      </Grid>
+      <Grid container direction="column">
+        {activeThread.messages.map((message) => (
+          <Message key={message._id} message={message} />
+        ))}
+      </Grid>
     </Paper>
   );
 };

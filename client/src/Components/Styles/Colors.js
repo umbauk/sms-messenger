@@ -2,7 +2,6 @@ const colors = {
   white: "#FFFFFF",
   black: "#000000",
   sideNavigation: "#31383D",
-  accent: "#C3DDD3",
   textGrey: "#505153",
   darkGrey: "#31383D",
   lightGrey: "#9B9B9B",

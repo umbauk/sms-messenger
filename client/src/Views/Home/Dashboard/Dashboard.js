@@ -18,13 +18,14 @@ const useStyles = makeStyles((theme) => ({
 
 const Dashboard = (props) => {
   const classes = useStyles();
+  const { activeThread } = props;
 
-  return (
+  return activeThread ? (
     <Grid container className={classes.root} alignItems="center">
-      <MainConversation />
+      <MainConversation activeThread={activeThread} />
       <MessageInput />
     </Grid>
-  );
+  ) : null;
 };
 
 export default Dashboard;

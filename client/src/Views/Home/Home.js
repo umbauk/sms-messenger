@@ -56,15 +56,19 @@ const Home = () => {
   const smallDevice = window.innerWidth < theme.breakpoints.width("md");
   const context = useContext(AuthUserContext);
   const [menuOpen, setMenuOpen] = useState(!smallDevice);
-  const [threads, setThreads] = useState(null);
+  const [threads, setThreads] = useState([]);
+  const [activeThread, setActiveThread] = useState(null);
 
   useEffect(() => {
     const getMessages = async () => {
       const response = await getAllMessages();
       setThreads(response);
+      setActiveThread(response[0]);
     };
-    getMessages();
-  }, []);
+    if (context.user) {
+      getMessages();
+    }
+  }, [context.user]);
 
   return (
     <div className={classes.root}>
@@ -89,6 +93,8 @@ const Home = () => {
             sidebarWidth={SIDEBAR_WIDTH}
             smallDevice={smallDevice}
             threads={threads}
+            setActiveThread={setActiveThread}
+            activeThread={activeThread}
           />
 
           <main
@@ -98,7 +104,7 @@ const Home = () => {
           >
             <Switch>
               <Route path="/">
-                <Dashboard threads={threads} />
+                <Dashboard activeThread={activeThread} />
               </Route>
               <Route>
                 <Redirect to="/" />
