@@ -21,4 +21,9 @@ const logOutUser = () => {
   return axios.post("/api/users/logout");
 };
 
-export { register, login, getUser, logOutUser };
+const getAllMessages = async () => {
+  const response = await axios.get("/api/customers");
+  return response.data;
+};
+
+export { register, login, getUser, logOutUser, getAllMessages };

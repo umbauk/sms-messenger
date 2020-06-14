@@ -1,13 +1,14 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { makeStyles, useTheme } from "@material-ui/core";
 import { Route, Switch, Redirect } from "react-router-dom";
 import clsx from "clsx";
 
 import Toolbar from "Components/Toolbar/HomeToolbar";
-import Sidebar from "Components/Sidebar/Sidebar";
+import Sidebar from "Views/Home/Sidebar/Sidebar";
 import colors from "Components/Styles/Colors";
 import AuthUserContext from "Components/Session/AuthUserContext";
 import Dashboard from "./Dashboard/Dashboard";
+import { getAllMessages } from "Utils/api";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -49,12 +50,21 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Home = () => {
-  const SIDEBAR_WIDTH = "15rem"; // width of sidebar, used also for resizing top toolbar and content
+  const SIDEBAR_WIDTH = "30rem"; // width of sidebar, used also for resizing top toolbar and content
+  const classes = useStyles({ sidebarWidth: SIDEBAR_WIDTH });
   const theme = useTheme();
   const smallDevice = window.innerWidth < theme.breakpoints.width("md");
-  const [menuOpen, setMenuOpen] = useState(!smallDevice);
   const context = useContext(AuthUserContext);
-  const classes = useStyles({ sidebarWidth: SIDEBAR_WIDTH });
+  const [menuOpen, setMenuOpen] = useState(!smallDevice);
+  const [threads, setThreads] = useState(null);
+
+  useEffect(() => {
+    const getMessages = async () => {
+      const response = await getAllMessages();
+      setThreads(response);
+    };
+    getMessages();
+  }, []);
 
   return (
     <div className={classes.root}>
@@ -78,6 +88,7 @@ const Home = () => {
             setMenuOpen={setMenuOpen}
             sidebarWidth={SIDEBAR_WIDTH}
             smallDevice={smallDevice}
+            threads={threads}
           />
 
           <main
@@ -87,7 +98,7 @@ const Home = () => {
           >
             <Switch>
               <Route path="/">
-                <Dashboard />
+                <Dashboard threads={threads} />
               </Route>
               <Route>
                 <Redirect to="/" />

@@ -10,7 +10,22 @@ exports.sendMessage = async (req, res) => {
   const { content, customerId } = req.body;
 
   try {
-    const customer = await Customer.findById(customerId);
+    let customer = null;
+    if (mongoose.Types.ObjectId.isValid(id)) {
+      customer = await Customer.findById(customerId);
+    }
+
+    if (!customer) {
+      res
+        .status(404)
+        .json({ error: `Customer with id ${customerId} is not found` });
+      return;
+    } else if (customer.ownedBy !== req.user.id) {
+      res
+        .status(500)
+        .json({ error: `Customer with id ${id} is not owned by this user` });
+      return;
+    }
 
     const message = await client.messages.create({
       body: content,
@@ -26,31 +41,27 @@ exports.sendMessage = async (req, res) => {
       fromCustomer: false,
     });
 
-    res.status(200).send(message);
+    res.status(200).json(message);
   } catch (error) {
     console.log("Error sending message", error);
-    res.status(500).send({ error: error });
+    res.status(500).json({ error: error });
   }
 };
 
 exports.receiveMessage = async (req, res) => {
-  console.log(req.body);
   const { From, Body } = req.body;
 
   try {
-    let customer = await Customer.findOne({ phoneNum: From });
-    console.log("Customer:", customer);
+    const customer = await Customer.findOne({ phoneNum: From });
     if (!customer) {
-      customer = new Customer({
-        name: "Unknown",
-        phoneNum: From,
+      console.log("Message received from unknown number", From, Body);
+    } else {
+      customer.messages.push({
+        fromCustomer: true,
+        content: Body,
       });
+      await customer.save();
     }
-    customer.messages.push({
-      fromCustomer: true,
-      content: Body,
-    });
-    await customer.save();
 
     const twiml = new MessagingResponse();
     twiml.message("");

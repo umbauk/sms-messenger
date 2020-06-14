@@ -78,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Sidebar = (props) => {
   const classes = useStyles({ sidebarWidth: props.sidebarWidth });
-  const { menuOpen, setMenuOpen, smallDevice } = props;
+  const { menuOpen, setMenuOpen, smallDevice, threads } = props;
   const [active, setActive] = useState("home");
   const location = useLocation();
 
