@@ -17,8 +17,9 @@ const sendTokenResponse = (user, statusCode, res) => {
   if (process.env.NODE_ENV === "production") {
     options.secure = true; // Only send cookies with https protocol
   }
+  user.password = "";
 
-  res.status(statusCode).cookie("jwt", token, options).json({ user: user });
+  res.status(statusCode).cookie("jwt", token, options).json({ user });
 };
 
 // @route POST /users/register
