@@ -8,9 +8,9 @@ const useStyles = makeStyles((theme) => ({
     width: "50%",
     marginBottom: "1rem",
     borderRadius: 20,
-    alignSelf: (props) => (props.fromCustomer ? "flex-start" : "flex-end"),
     backgroundColor: (props) =>
       props.fromCustomer ? colors.greyOpaque : colors.logoLight,
+    color: (props) => (props.fromCustomer ? colors.textGrey : colors.white),
   },
 }));
 

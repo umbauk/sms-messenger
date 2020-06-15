@@ -14,16 +14,18 @@ import { sendMessage } from "Utils/api";
 const useStyles = makeStyles((theme) => ({
   title: {
     color: colors.bodyGrey,
-    marginBottom: "1rem",
+    margin: "1rem",
     textTransform: "uppercase",
   },
   paper: {
     marginTop: "2rem",
-    padding: "2rem",
+    padding: "1rem",
     width: "100%",
+    maxWidth: "800px",
   },
   textField: {
-    width: "85%",
+    width: "100%",
+    padding: "1rem",
   },
   messageInput: {
     fontSize: "1rem",
@@ -32,7 +34,14 @@ const useStyles = makeStyles((theme) => ({
   sendBtn: {
     cursor: "pointer",
     color: colors.accent,
-    marginLeft: "2rem",
+    marginLeft: "1rem",
+    padding: "1rem",
+  },
+  [theme.breakpoints.down("xs")]: {
+    paper: {
+      padding: "1rem",
+      marginTop: "1rem",
+    },
   },
 }));
 
@@ -51,23 +60,27 @@ const MessageInput = (props) => {
     <Paper className={classes.paper}>
       <Typography className={classes.title}>Send a Message</Typography>
       <Grid container direction="row" alignItems="flex-end">
-        <TextField
-          className={classes.textField}
-          name="newMessage"
-          value={newMessage}
-          placeholder="Type a Message"
-          multiline
-          autoComplete="off"
-          onChange={(e) => {
-            setNewMessage(e.target.value);
-          }}
-          InputProps={{
-            classes: {
-              input: classes.messageInput,
-            },
-          }}
-        />
-        <Send className={classes.sendBtn} onClick={handleClick} />
+        <Grid item xs={10}>
+          <TextField
+            className={classes.textField}
+            name="newMessage"
+            value={newMessage}
+            placeholder="Type a Message"
+            multiline
+            autoComplete="off"
+            onChange={(e) => {
+              setNewMessage(e.target.value);
+            }}
+            InputProps={{
+              classes: {
+                input: classes.messageInput,
+              },
+            }}
+          />
+        </Grid>
+        <Grid item xs={2}>
+          <Send className={classes.sendBtn} onClick={handleClick} />
+        </Grid>
       </Grid>
     </Paper>
   );
