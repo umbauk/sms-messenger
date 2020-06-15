@@ -79,9 +79,9 @@ const Sidebar = (props) => {
   };
 
   const ThreadList = () => {
-    if (activeThread) {
+    if (threads.length > 0 && activeThread) {
       return threads.map((thread) => {
-        const active = activeThread._id === thread._id ? true : false;
+        const active = thread._id === activeThread._id ? true : false;
 
         return (
           <Thread

@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import { makeStyles, useTheme } from "@material-ui/core";
 import { Route, Switch, Redirect } from "react-router-dom";
 import clsx from "clsx";
@@ -56,8 +56,16 @@ const Home = () => {
   const smallDevice = window.innerWidth < theme.breakpoints.width("md");
   const context = useContext(AuthUserContext);
   const [menuOpen, setMenuOpen] = useState(!smallDevice);
-  const [threads, setThreads] = useState([]);
   const [activeThread, setActiveThread] = useState(null);
+  const [threads, _setThreads] = useState([]);
+
+  // To access state from inside an event listener we need to manually
+  // update a reference as event listeners always refer to initial state
+  const threadsRef = useRef(threads);
+  const setThreads = (data) => {
+    threadsRef.current = data;
+    _setThreads(data);
+  };
 
   useEffect(() => {
     const getMessages = async () => {
@@ -69,6 +77,20 @@ const Home = () => {
       getMessages();
     }
   }, [context.user]);
+
+  useEffect(() => {
+    if (context.socket) {
+      context.socket.on("new_message", (data) => {
+        console.log("Message received");
+        const updatedThreadIndex = threadsRef.current.findIndex(
+          (curr) => curr._id === data.customerId
+        );
+        const newThreads = [...threadsRef.current];
+        newThreads[updatedThreadIndex].messages.push(data.message);
+        setThreads(newThreads);
+      });
+    }
+  }, [context.socket]);
 
   if (context.checkingLoginState) return null;
 

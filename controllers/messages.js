@@ -6,6 +6,7 @@ const client = require("twilio")(TWILIO_SID, TWILIO_AUTH_TOKEN);
 const MessagingResponse = require("twilio").twiml.MessagingResponse;
 const mongoose = require("mongoose");
 const Customer = require("../models/customer");
+const socketApi = require("./socketApi");
 
 exports.sendMessage = async (req, res) => {
   const { content, customerId } = req.body;
@@ -41,8 +42,13 @@ exports.sendMessage = async (req, res) => {
       status: message.status,
       fromCustomer: false,
     });
-
     await customer.save();
+
+    socketApi.newMessage(
+      req.user.id,
+      customerId,
+      customer.messages[customer.messages.length - 1]
+    );
 
     res.status(200).json(message);
   } catch (error) {
@@ -64,6 +70,11 @@ exports.receiveMessage = async (req, res) => {
         content: Body,
       });
       await customer.save();
+      socketApi.newMessage(
+        customer.ownedBy,
+        customer._id,
+        customer.messages[customer.messages.length - 1]
+      );
     }
 
     const twiml = new MessagingResponse();
