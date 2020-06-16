@@ -51,7 +51,6 @@ const MessageInput = (props) => {
   const { activeThread } = props;
 
   const handleClick = async () => {
-    // Call send message api
     await sendMessage(newMessage, activeThread._id);
     setNewMessage("");
   };
