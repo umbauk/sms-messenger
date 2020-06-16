@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Thread = (props) => {
-  const { thread, setActiveThread, active, setMenuOpen } = props;
+  const { thread, setActiveThread, active, setMenuOpen, smallDevice } = props;
   const classes = useStyles({ active: active });
 
   const latestMsgIndex = thread.messages.length - 1;
@@ -35,7 +35,7 @@ const Thread = (props) => {
 
   const handleClick = () => {
     setActiveThread(thread);
-    setMenuOpen(false);
+    if (smallDevice) setMenuOpen(false);
   };
 
   const formattedMsgContent =

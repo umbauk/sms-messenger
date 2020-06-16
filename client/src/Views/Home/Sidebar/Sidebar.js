@@ -36,6 +36,7 @@ const SidebarTab = withStyles({
     color: colors.accent,
     fontWeight: 600,
     marginTop: "2rem",
+    cursor: "default",
   },
 })(Tab);
 
@@ -85,6 +86,7 @@ const Sidebar = (props) => {
     activeThread,
     setActiveThread,
     getMessages,
+    smallDevice,
   } = props;
   const [newContactDialogOpen, setNewContactDialogOpen] = useState(false);
 
@@ -108,6 +110,7 @@ const Sidebar = (props) => {
             setActiveThread={setActiveThread}
             active={active}
             setMenuOpen={setMenuOpen}
+            smallDevice={smallDevice}
           />
         );
       });
