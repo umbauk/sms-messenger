@@ -45,16 +45,26 @@ const NewContactDialog = (props) => {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await createNewCustomer(fields);
+      const formattedPhoneNum = fields.phoneNum.replace(/[\s()-]/g, "");
+      await createNewCustomer({
+        ...fields,
+        phoneNum: formattedPhoneNum,
+      });
       setSubmitted(true);
+      setFields({ name: "", phoneNum: "" });
       getMessages();
     } catch (error) {
       console.log(error);
     }
   };
 
+  const handleClose = () => {
+    props.onClose();
+    setSubmitted(false);
+  };
+
   return (
-    <Dialog open={props.open} onClose={props.onClose}>
+    <Dialog open={props.open} onClose={handleClose}>
       <DialogTitle className={classes.dialogTitle}>
         {submitted ? "Contact Created!" : "Create New Contact"}
       </DialogTitle>
