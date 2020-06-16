@@ -107,6 +107,7 @@ const Sidebar = (props) => {
             thread={thread}
             setActiveThread={setActiveThread}
             active={active}
+            setMenuOpen={setMenuOpen}
           />
         );
       });
