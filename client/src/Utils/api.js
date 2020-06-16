@@ -26,8 +26,20 @@ const getAllMessages = async () => {
   return response.data;
 };
 
+const createNewCustomer = (fields) => {
+  return axios.post("/api/customers/create", fields);
+};
+
 const sendMessage = async (content, customerId) => {
   return axios.post("/api/messages/send", { content, customerId });
 };
 
-export { register, login, getUser, logOutUser, getAllMessages, sendMessage };
+export {
+  register,
+  login,
+  getUser,
+  logOutUser,
+  getAllMessages,
+  createNewCustomer,
+  sendMessage,
+};

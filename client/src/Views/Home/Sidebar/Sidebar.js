@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {
   makeStyles,
@@ -8,12 +8,16 @@ import {
   Tabs,
   Tab,
   withStyles,
+  Card,
+  CardContent,
+  Typography,
 } from "@material-ui/core";
 import { ChevronLeft } from "@material-ui/icons";
 
 import colors from "Components/Styles/Colors";
 import logo from "Assets/vialogo.svg";
 import Thread from "Views/Home/Sidebar/Thread";
+import NewContactDialog from "./NewContact";
 
 const SidebarTabs = withStyles({
   indicator: {
@@ -60,6 +64,16 @@ const useStyles = makeStyles((theme) => ({
   threadContainer: {
     height: "100%",
   },
+  newContactCard: {
+    margin: "2rem",
+    cursor: "pointer",
+    backgroundColor: colors.sideNavigation,
+    color: colors.white,
+    borderColor: colors.textGrey,
+    "&:hover": {
+      backgroundColor: colors.accent,
+    },
+  },
 }));
 
 const Sidebar = (props) => {
@@ -70,10 +84,16 @@ const Sidebar = (props) => {
     threads,
     activeThread,
     setActiveThread,
+    getMessages,
   } = props;
+  const [newContactDialogOpen, setNewContactDialogOpen] = useState(false);
 
   const handleDrawerClose = () => {
     setMenuOpen(false);
+  };
+
+  const handleClick = () => {
+    setNewContactDialogOpen(true);
   };
 
   const ThreadList = () => {
@@ -117,7 +137,27 @@ const Sidebar = (props) => {
           <SidebarTab label="Conversations" value="home" disableRipple />
         </SidebarTabs>
         <ThreadList />
+
+        <Card
+          className={classes.newContactCard}
+          onClick={handleClick}
+          variant="outlined"
+        >
+          <CardContent>
+            <Grid container direction="column" alignItems="center">
+              <Typography className={classes.title} variant="h4">
+                +
+              </Typography>
+              <Typography variant="body1">Add New Contact</Typography>
+            </Grid>
+          </CardContent>
+        </Card>
       </Grid>
+      <NewContactDialog
+        open={newContactDialogOpen}
+        onClose={() => setNewContactDialogOpen(false)}
+        getMessages={getMessages}
+      />
     </Drawer>
   );
 };

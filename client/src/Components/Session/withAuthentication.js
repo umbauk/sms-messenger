@@ -17,16 +17,9 @@ const withAuthentication = (Component) => {
 
     useEffect(() => {
       setCurrentUser();
-      // return () => {
-      //   if (socket) {
-      //     console.log("socket", socket);
-      //     socket.disconnect();
-      //   }
-      // };
     }, []);
 
     const setCurrentUser = async (newUser) => {
-      console.log("Running setCurrentUser");
       try {
         if (newUser) {
           // user just logged in or registered

@@ -1,4 +1,10 @@
-import React, { useState, useContext, useEffect, useRef } from "react";
+import React, {
+  useState,
+  useContext,
+  useEffect,
+  useRef,
+  useCallback,
+} from "react";
 import { makeStyles, useTheme } from "@material-ui/core";
 import { Route, Switch, Redirect } from "react-router-dom";
 import clsx from "clsx";
@@ -67,21 +73,21 @@ const Home = () => {
     _setThreads(data);
   };
 
+  const getMessages = useCallback(async () => {
+    const response = await getAllMessages();
+    setThreads(response);
+    setActiveThread(response[0]);
+  }, []);
+
   useEffect(() => {
-    const getMessages = async () => {
-      const response = await getAllMessages();
-      setThreads(response);
-      setActiveThread(response[0]);
-    };
     if (context.user) {
       getMessages();
     }
-  }, [context.user]);
+  }, [context.user, getMessages]);
 
   useEffect(() => {
     if (context.socket) {
       context.socket.on("new_message", (data) => {
-        console.log("Message received");
         const updatedThreadIndex = threadsRef.current.findIndex(
           (curr) => curr._id === data.customerId
         );
@@ -119,6 +125,7 @@ const Home = () => {
             threads={threads}
             setActiveThread={setActiveThread}
             activeThread={activeThread}
+            getMessages={getMessages}
           />
 
           <main

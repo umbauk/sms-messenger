@@ -1,5 +1,12 @@
 import React from "react";
-import { makeStyles, Card, CardContent, Typography } from "@material-ui/core";
+import {
+  makeStyles,
+  Card,
+  CardContent,
+  Typography,
+  Grid,
+} from "@material-ui/core";
+import { format } from "timeago.js";
 
 import colors from "Components/Styles/Colors";
 
@@ -10,33 +17,48 @@ const useStyles = makeStyles((theme) => ({
     borderLeft: (props) =>
       props.active ? `solid 8px ${colors.accent}` : `solid 8px ${colors.white}`,
   },
+  content: {},
 }));
 
 const Thread = (props) => {
   const { thread, setActiveThread, active } = props;
   const classes = useStyles({ active: active });
 
-  const recentMessages = [];
-  const startElement =
-    thread.messages.length > 2 ? thread.messages.length - 2 : 0;
-  for (let i = startElement; i < thread.messages.length; i++) {
-    recentMessages.push(thread.messages[i]);
-  }
+  const latestMsgIndex = thread.messages.length - 1;
+  const mostRecentMessage =
+    latestMsgIndex >= 0 ? thread.messages[latestMsgIndex] : "";
+
+  const messageTimeDate =
+    latestMsgIndex >= 0
+      ? format(thread.messages[latestMsgIndex].timestamp)
+      : "";
 
   const handleClick = () => {
     setActiveThread(thread);
   };
 
+  const formattedMsgContent =
+    latestMsgIndex >= 0
+      ? mostRecentMessage.content.length > 55
+        ? `${mostRecentMessage.content.substring(0, 55)} ...`
+        : mostRecentMessage.content
+      : "No messages";
+
   return (
     <Card className={classes.card} onClick={handleClick} variant="outlined">
       <CardContent>
-        <Typography className={classes.title} variant="h6">
-          {thread.name}
+        <Grid
+          container
+          direction="row"
+          justify="space-between"
+          alignItems="center"
+        >
+          <Typography variant="h6">{thread.name}</Typography>
+          <Typography variant="body2">{messageTimeDate}</Typography>
+        </Grid>
+        <Typography variant="body2" className={classes.content}>
+          {formattedMsgContent}
         </Typography>
-        <Typography>...</Typography>
-        {recentMessages.map((msg) => (
-          <Typography key={msg._id}>{msg.content}</Typography>
-        ))}
       </CardContent>
     </Card>
   );

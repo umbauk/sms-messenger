@@ -5,7 +5,7 @@ import colors from "Components/Styles/Colors";
 
 const useStyles = makeStyles((theme) => ({
   card: {
-    width: "50%",
+    maxWidth: "80%",
     marginBottom: "1rem",
     borderRadius: 20,
     backgroundColor: (props) =>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { makeStyles, Grid, Paper, Typography } from "@material-ui/core";
 
 import Message from "./Message";
@@ -38,15 +38,19 @@ const MainConversation = (props) => {
   const classes = useStyles();
   const { activeThread } = props;
   const messagesContainerRef = useRef(null);
-  const [currentThread, setCurrentThread] = useState(activeThread);
 
+  // Scrolls the message window down on new message so user can see new message
   useEffect(() => {
-    setCurrentThread(activeThread);
     if (messagesContainerRef) {
       messagesContainerRef.current.scrollTop =
         messagesContainerRef.current.scrollHeight;
     }
-  }, [activeThread]);
+  }, [activeThread.messages.length]);
+
+  const match = activeThread.phoneNum.match(/^(\+1|)?(\d{3})(\d{3})(\d{4})$/);
+  const formattedPhoneNum = match
+    ? `${match[1]} (${match[2]}) ${match[3]}-${match[4]}`
+    : activeThread.phoneNum;
 
   return (
     <Paper className={classes.paper}>
@@ -57,21 +61,21 @@ const MainConversation = (props) => {
         className={classes.header}
       >
         <Typography variant="h5" className={classes.title}>
-          {currentThread.name}
+          {activeThread.name}
         </Typography>
-        <Typography className={classes.title}>
-          {currentThread.phoneNum}
-        </Typography>
+        <Typography className={classes.title}>{formattedPhoneNum}</Typography>
       </Grid>
+
       <Grid
         container
         direction="row"
         className={classes.messagesContainer}
         ref={messagesContainerRef}
       >
-        {currentThread.messages.map((message, i) => {
+        {activeThread.messages.map((message, i) => {
           let newDay = false;
           const thisMsgDate = new Date(message.timestamp);
+
           const DateDivider = () => (
             <Typography variant="body1" className={classes.dateDivider}>
               {thisMsgDate.toLocaleString("default", {
@@ -83,7 +87,7 @@ const MainConversation = (props) => {
 
           if (i > 0) {
             const prevMsgDate = new Date(
-              currentThread.messages[i - 1].timestamp
+              activeThread.messages[i - 1].timestamp
             );
 
             if (thisMsgDate.getDate() !== prevMsgDate.getDate()) {
