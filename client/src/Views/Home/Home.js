@@ -19,14 +19,13 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     marginTop: "6rem",
-    height: "calc(100vh - 6rem)",
     flexGrow: 1,
     padding: theme.spacing(3),
     transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    marginLeft: (props) => `-${props.sidebarWidth}`,
+    marginLeft: (props) => `calc(-1 * ${props.sidebarWidth})`,
   },
   contentShift: {
     transition: theme.transitions.create("margin", {
@@ -37,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
   [theme.breakpoints.down("sm")]: {
     contentShift: {
-      marginLeft: (props) => `-${props.sidebarWidth}`,
+      marginLeft: (props) => `calc(-1 * ${props.sidebarWidth})`,
     },
     content: {
       padding: theme.spacing(1),
@@ -51,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Home = () => {
-  const SIDEBAR_WIDTH = "20rem"; // width of sidebar, used also for resizing top toolbar and content
+  const SIDEBAR_WIDTH = "calc(20rem + 10vw)"; // width of sidebar, used also for resizing top toolbar and content
   const classes = useStyles({ sidebarWidth: SIDEBAR_WIDTH });
   const theme = useTheme();
   const smallDevice = window.innerWidth < theme.breakpoints.width("md");

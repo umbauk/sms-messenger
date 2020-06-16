@@ -27,13 +27,11 @@ const SidebarTab = withStyles({
     fontSize: "1rem",
     lineHeight: "14px",
     letterSpacing: "1.16667px",
-    marginBottom: "1rem",
     textTransform: "uppercase",
     width: "100%",
-    background: `rgba(87,88,90,0.2)`,
     color: colors.accent,
-    borderLeft: `4px solid ${colors.accent}`,
     fontWeight: 600,
+    marginTop: "2rem",
   },
 })(Tab);
 

@@ -8,11 +8,8 @@ const useStyles = makeStyles((theme) => ({
     padding: "1rem",
     width: "100%",
     maxWidth: "800px",
-    height: "70vh",
+    height: "67vh",
     margin: "auto",
-  },
-  root: {
-    height: "100%",
   },
   header: {
     padding: "1rem",
@@ -22,10 +19,17 @@ const useStyles = makeStyles((theme) => ({
     height: "90%",
     overflow: "auto",
     padding: "1rem",
+    alignContent: "flex-start",
+  },
+  dateDivider: {
+    margin: "1rem",
   },
   [theme.breakpoints.down("xs")]: {
     paper: {
       padding: "0rem",
+    },
+    messagesContainer: {
+      padding: "0.5rem",
     },
   },
 }));
@@ -46,7 +50,6 @@ const MainConversation = (props) => {
 
   return (
     <Paper className={classes.paper}>
-      {/* <Grid container className={classes.root}> */}
       <Grid
         container
         justify="space-between"
@@ -66,18 +69,41 @@ const MainConversation = (props) => {
         className={classes.messagesContainer}
         ref={messagesContainerRef}
       >
-        {currentThread.messages.map((message) => (
-          <Grid
-            item
-            xs={12}
-            container
-            justify={message.fromCustomer ? "flex-start" : "flex-end"}
-            key={message._id}
-          >
-            <Message message={message} />
-          </Grid>
-        ))}
-        {/* </Grid> */}
+        {currentThread.messages.map((message, i) => {
+          let newDay = false;
+          const thisMsgDate = new Date(message.timestamp);
+          const DateDivider = () => (
+            <Typography variant="body1" className={classes.dateDivider}>
+              {thisMsgDate.toLocaleString("default", {
+                month: "long",
+                day: "numeric",
+              })}
+            </Typography>
+          );
+
+          if (i > 0) {
+            const prevMsgDate = new Date(
+              currentThread.messages[i - 1].timestamp
+            );
+
+            if (thisMsgDate.getDate() !== prevMsgDate.getDate()) {
+              newDay = true;
+            }
+          }
+
+          return (
+            <Grid item container justify="center" key={message._id}>
+              {(newDay || i === 0) && <DateDivider />}
+              <Grid
+                item
+                container
+                justify={message.fromCustomer ? "flex-start" : "flex-end"}
+              >
+                <Message message={message} />
+              </Grid>
+            </Grid>
+          );
+        })}
       </Grid>
     </Paper>
   );

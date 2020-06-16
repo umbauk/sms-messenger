@@ -71,10 +71,11 @@ const MessageInput = (props) => {
             onChange={(e) => {
               setNewMessage(e.target.value);
             }}
-            InputProps={{
+            inputProps={{
               classes: {
                 input: classes.messageInput,
               },
+              maxLength: 1600,
             }}
           />
         </Grid>

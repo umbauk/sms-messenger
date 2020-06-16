@@ -33,6 +33,7 @@ const Thread = (props) => {
         <Typography className={classes.title} variant="h6">
           {thread.name}
         </Typography>
+        <Typography>...</Typography>
         {recentMessages.map((msg) => (
           <Typography key={msg._id}>{msg.content}</Typography>
         ))}
