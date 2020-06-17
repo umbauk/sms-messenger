@@ -25,7 +25,7 @@ exports.getCustomer = async (req, res) => {
       return;
     } else if (customer.ownedBy !== req.user.id) {
       res
-        .status(500)
+        .status(401)
         .json({ error: `Customer with id ${id} is not owned by this user` });
       return;
     }

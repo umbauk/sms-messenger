@@ -1,28 +1,39 @@
 const io = require("socket.io")();
-const socketApi = { io };
+const socketServer = { io };
 
-socketApi.sockets = [];
+const userIdHash = {};
+const socketIdHash = {};
 
-socketApi.io.on("connect", (socket) => {
+socketServer.io.on("connect", (socket) => {
   const { userId } = socket.handshake.query;
   console.log(`User ${userId} connected`);
 
+  if (userIdHash[userId]) {
+    userIdHash[userId].push(socket.id);
+  } else {
+    userIdHash[userId] = [socket.id];
+  }
+
   socket.userId = userId;
   socket.on("disconnect", () => {
-    socketApi.sockets.splice(socketApi.sockets.indexOf(socket), 1);
-    console.log(`User ${socket.userId} disconnected`);
-  });
+    userIdHash[userId].forEach((socketId, i) => {
+      if (socketId === socket.id) userIdHash[userId].splice(i, 1);
+    });
+    delete socketIdHash[socket.id];
 
-  socketApi.sockets.push(socket);
+    console.log(`User ${userId} disconnected`);
+  });
 });
 
-socketApi.newMessage = (userId, customerId, message) => {
-  // There may be more than one socket with same userId if user is logged in on
-  // multiple devices, so find all sockets
-  const sockets = socketApi.sockets.filter((curr) => curr.userId == userId);
-  sockets.forEach((socket) =>
-    socket.emit("new_message", { customerId, message })
-  );
+socketServer.newMessage = (userId, customerId, message) => {
+  // If user is connected on more than one device, emit new_message to all
+  const socketIds = userIdHash[userId];
+  socketIds.forEach((socketId) => {
+    socketServer.io.sockets.connected[socketId].emit("new_message", {
+      customerId,
+      message,
+    });
+  });
 };
 
-module.exports = socketApi;
+module.exports = socketServer;
