@@ -8,9 +8,6 @@ const routes = require("./routes/index");
 const passport = require("passport");
 const { join } = require("path");
 const cors = require("cors");
-const session = require("express-session");
-const MongoStore = require("connect-mongo")(session);
-const secret = require("./config/config.js").appSecret;
 
 require("./config/passport")(passport);
 
@@ -38,14 +35,6 @@ app.use(urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(passport.initialize());
 app.use(cors());
-app.use(
-  session({
-    secret: secret,
-    store: new MongoStore({ mongooseConnection: mongoose.connection }),
-    resave: false,
-    saveUninitialized: true,
-  })
-);
 
 // Everything in the back-end needs to be prefixed with /api/
 app.use("/api/", routes);
