@@ -1,5 +1,6 @@
 /*
  * Logged in users only.
+ * Gets messages from server
  * Adds newMessage listener to web socket
  */
 

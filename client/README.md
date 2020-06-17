@@ -1,68 +1,53 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Via Take Home Challenge - SMS Messaging App
 
-## Available Scripts
+This web app allows users to send and receive SMS messages. It uses Mongo, Express, React and Node. Features:
 
-In the project directory, you can run:
+- Twilio API integration
+- Realtime updates for new messages via socket.io
+- Authentication of back-end routes using passport.js and JWT in cookies
+- Material UI components and JSS styling
+- Mobile responsive
+- Add new contacts, contacts with new messages rise to the top in sidebar, screen auto scrolls down on new messages, date separators for messages on different days, new line preservation in messages, collapsable sidebar with smooth animation
+- Emojis! 🙄
 
-### `npm start`
+## Deployment
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The app is deployed on Heroku at https://sms-chat-app.herokuapp.com/
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+![Screenshot](public/assets/screenshot.png)
 
-### `npm test`
+## Installation & Local Startup
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Server
 
-### `npm run build`
+_Note: You will need a .env file in the root directory containing the Twilio and Mongo Cloud credentials_
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+In the root directory, run `npm install` and `npm run dev` to start the server in development mode on `http://localhost:3001`
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+### Client
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+In the `/client` directory run `npm install` and `npm start` to start the client in development mode on `http://localhost:3000`.
 
-### `npm run eject`
+Visit `http://localhost:3000` in your browser to use the app.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+_Note: `npm run build` builds the React app for production in the /build folder._
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Instructions
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+You can register a new user or click the `Demo` button on the login page to see an account with customers and messages.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+You can add new numbers in the sidebar (_Note: because this is using a Twilio trial account, any new numbers need to also e added in the Twilio console by me and confirmed with an SMS code_)
 
-## Learn More
+In the Demo account you can send messages to the existing customers (Picard and Janeway) and the messages will come to me. If I see them I'll reply and you can see the sockets in action!
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Testing
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+I have written some simple tests (in src/\_\_tests\_\_).
 
-### Code Splitting
+These can be run with `npm run test`
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+## What I'd do if I had more time
 
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- Write more tests
+- Do better error handling and data checking (e.g. you can add invalid phone numbers)
+- Add new unread message markers in the sidebar

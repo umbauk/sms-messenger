@@ -18,18 +18,18 @@ const useStyles = makeStyles((theme) => ({
   messagesContainer: {
     height: "90%",
     overflow: "auto",
-    padding: "1rem",
+    padding: "0 1rem 1rem 1rem",
     alignContent: "flex-start",
   },
   dateDivider: {
-    margin: "1rem",
+    marginBottom: "1rem",
   },
   [theme.breakpoints.down("xs")]: {
     paper: {
       padding: "0rem",
     },
     messagesContainer: {
-      padding: "0.5rem",
+      padding: "0 0.5rem 1rem 0.5rem",
     },
   },
 }));
