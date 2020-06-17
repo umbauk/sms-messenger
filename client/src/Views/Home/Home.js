@@ -1,3 +1,8 @@
+/*
+ * Logged in users only.
+ * Adds newMessage listener to web socket
+ */
+
 import React, {
   useState,
   useContext,

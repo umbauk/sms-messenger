@@ -12,6 +12,7 @@ import { Close } from "@material-ui/icons";
 import { Link as RouterLink } from "react-router-dom";
 
 import StyledButton from "Components/Button/StyledButtonNative";
+import StyledButtonText from "Components/Button/StyledButtonText";
 import AuthUserContext from "Components/Session/AuthUserContext";
 
 import { login } from "Utils/api";
@@ -21,6 +22,13 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
     marginBottom: theme.spacing(2),
     textAlign: "center",
+  },
+  or: {
+    paddingBottom: "1rem",
+  },
+  demoBtn: {
+    width: "4rem",
+    border: "1px solid",
   },
 }));
 
@@ -51,6 +59,11 @@ const Login = () => {
     setErrors({});
   };
 
+  const demoAccount = () => {
+    console.log("Demo");
+    setFields({ email: "test@test.com", password: "password" });
+  };
+
   return (
     <>
       <Typography variant="h3" className={classes.title} gutterBottom>
@@ -69,6 +82,7 @@ const Login = () => {
           margin="normal"
           error={"email" in errors}
           helperText={errors.email}
+          autoComplete="username"
         />
         <TextField
           label="Password"
@@ -82,6 +96,7 @@ const Login = () => {
           value={fields.password}
           error={"password" in errors}
           helperText={errors.password}
+          autoComplete="current-password"
         />
 
         <StyledButton
@@ -92,6 +107,14 @@ const Login = () => {
         >
           Login
         </StyledButton>
+        <Typography className={classes.or}>- or -</Typography>
+        <Typography>
+          use{" "}
+          <StyledButtonText className={classes.demoBtn} onClick={demoAccount}>
+            DEMO
+          </StyledButtonText>{" "}
+          account
+        </Typography>
       </form>
 
       <Hidden smUp>

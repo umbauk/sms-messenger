@@ -1,3 +1,7 @@
+/*
+ * Displays Login and Register Components and Landing Navbar
+ */
+
 import React, { useContext } from "react";
 import { Grid, Paper, Hidden, makeStyles } from "@material-ui/core";
 import { useLocation, Redirect } from "react-router-dom";

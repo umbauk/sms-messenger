@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const NewContactDialog = (props) => {
+  const { onClose } = props;
   const [fields, setFields] = useState({
     name: "",
     phoneNum: "",
@@ -59,7 +60,7 @@ const NewContactDialog = (props) => {
   };
 
   const handleClose = () => {
-    props.onClose();
+    onClose();
     setSubmitted(false);
   };
 
