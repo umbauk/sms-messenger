@@ -8,8 +8,8 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     padding: "1rem 3rem",
-    height: "100%",
     flexWrap: "nowrap",
+    height: "85vh",
   },
   [theme.breakpoints.down("xs")]: {
     root: {
@@ -29,12 +29,8 @@ const Dashboard = (props) => {
       alignItems="center"
       direction="column"
     >
-      <Grid container item justify="center">
-        <MainConversation activeThread={activeThread} />
-      </Grid>
-      <Grid container item justify="center">
-        <MessageInput activeThread={activeThread} />
-      </Grid>
+      <MainConversation activeThread={activeThread} />
+      <MessageInput activeThread={activeThread} />
     </Grid>
   ) : null;
 };

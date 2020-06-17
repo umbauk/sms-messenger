@@ -20,11 +20,6 @@ socketApi.newMessage = (userId, customerId, message) => {
   // There may be more than one socket with same userId if user is logged in on
   // multiple devices, so find all sockets
   const sockets = socketApi.sockets.filter((curr) => curr.userId == userId);
-  console.log("socketApi.sockets.length", socketApi.sockets.length);
-  console.log("No. sockets found:", sockets.length);
-  socketApi.sockets.forEach((socket) => {
-    console.log("socket.userId:", socket.userId);
-  });
   sockets.forEach((socket) =>
     socket.emit("new_message", { customerId, message })
   );

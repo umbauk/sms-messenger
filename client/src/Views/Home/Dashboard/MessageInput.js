@@ -1,27 +1,17 @@
 import React, { useState } from "react";
-import {
-  makeStyles,
-  Grid,
-  Paper,
-  Typography,
-  TextField,
-} from "@material-ui/core";
+import { makeStyles, Grid, Paper, TextField } from "@material-ui/core";
 import { Send } from "@material-ui/icons";
 
 import colors from "Components/Styles/Colors";
 import { sendMessage } from "Utils/api";
 
 const useStyles = makeStyles((theme) => ({
-  title: {
-    color: colors.bodyGrey,
-    margin: "1rem",
-    textTransform: "uppercase",
-  },
   paper: {
     marginTop: "2rem",
     padding: "1rem",
     width: "100%",
     maxWidth: "800px",
+    minHeight: "4rem",
   },
   textField: {
     width: "100%",
@@ -57,7 +47,6 @@ const MessageInput = (props) => {
 
   return (
     <Paper className={classes.paper}>
-      <Typography className={classes.title}>Send a Message</Typography>
       <Grid container direction="row" alignItems="flex-end">
         <Grid item xs={10}>
           <TextField

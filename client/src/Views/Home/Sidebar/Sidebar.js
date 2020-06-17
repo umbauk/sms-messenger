@@ -100,6 +100,18 @@ const Sidebar = (props) => {
 
   const ThreadList = () => {
     if (threads.length > 0 && activeThread) {
+      threads.sort((a, b) => {
+        const aTimestamp =
+          a.messages.length > 0
+            ? new Date(a.messages[a.messages.length - 1].timestamp)
+            : 0;
+        const bTimestamp =
+          b.messages.length > 0
+            ? new Date(b.messages[b.messages.length - 1].timestamp)
+            : 0;
+        return bTimestamp - aTimestamp;
+      });
+
       return threads.map((thread) => {
         const active = thread._id === activeThread._id ? true : false;
 

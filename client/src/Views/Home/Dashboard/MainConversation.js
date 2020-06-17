@@ -8,8 +8,8 @@ const useStyles = makeStyles((theme) => ({
     padding: "1rem",
     width: "100%",
     maxWidth: "800px",
-    height: "67vh",
-    margin: "auto",
+    flexGrow: 1,
+    overflow: "auto",
   },
   header: {
     padding: "1rem",
@@ -72,42 +72,46 @@ const MainConversation = (props) => {
         className={classes.messagesContainer}
         ref={messagesContainerRef}
       >
-        {activeThread.messages.map((message, i) => {
-          let newDay = false;
-          const thisMsgDate = new Date(message.timestamp);
+        {activeThread.messages.length > 0 ? (
+          activeThread.messages.map((message, i) => {
+            let newDay = false;
+            const thisMsgDate = new Date(message.timestamp);
 
-          const DateDivider = () => (
-            <Typography variant="body1" className={classes.dateDivider}>
-              {thisMsgDate.toLocaleString("default", {
-                month: "long",
-                day: "numeric",
-              })}
-            </Typography>
-          );
-
-          if (i > 0) {
-            const prevMsgDate = new Date(
-              activeThread.messages[i - 1].timestamp
+            const DateDivider = () => (
+              <Typography variant="body1" className={classes.dateDivider}>
+                {thisMsgDate.toLocaleString("default", {
+                  month: "long",
+                  day: "numeric",
+                })}
+              </Typography>
             );
 
-            if (thisMsgDate.getDate() !== prevMsgDate.getDate()) {
-              newDay = true;
-            }
-          }
+            if (i > 0) {
+              const prevMsgDate = new Date(
+                activeThread.messages[i - 1].timestamp
+              );
 
-          return (
-            <Grid item container justify="center" key={message._id}>
-              {(newDay || i === 0) && <DateDivider />}
-              <Grid
-                item
-                container
-                justify={message.fromCustomer ? "flex-start" : "flex-end"}
-              >
-                <Message message={message} />
+              if (thisMsgDate.getDate() !== prevMsgDate.getDate()) {
+                newDay = true;
+              }
+            }
+
+            return (
+              <Grid item container justify="center" key={message._id}>
+                {(newDay || i === 0) && <DateDivider />}
+                <Grid
+                  item
+                  container
+                  justify={message.fromCustomer ? "flex-start" : "flex-end"}
+                >
+                  <Message message={message} />
+                </Grid>
               </Grid>
-            </Grid>
-          );
-        })}
+            );
+          })
+        ) : (
+          <Typography>No messages yet </Typography>
+        )}
       </Grid>
     </Paper>
   );
