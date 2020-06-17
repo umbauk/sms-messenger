@@ -14,7 +14,7 @@ This web app allows users to send and receive SMS messages. It uses Mongo, Expre
 
 The app is deployed on Heroku at https://sms-chat-app.herokuapp.com/
 
-![Screenshot](public/assets/screenshot.png)
+![Screenshot](assets/screenshot.png)
 
 ## Installation & Local Startup
 
