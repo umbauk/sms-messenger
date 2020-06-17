@@ -23,8 +23,7 @@ import { getAllMessages } from "Utils/api";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: "auto",
-    minHeight: "100vh",
+    height: "100vh",
     backgroundColor: colors.background,
     display: "flex",
   },
@@ -69,8 +68,6 @@ const Home = () => {
   const [menuOpen, setMenuOpen] = useState(!smallDevice);
   const [activeThread, setActiveThread] = useState(null);
   const [threads, _setThreads] = useState([]);
-
-  console.log("REACT_APP_SERVER_URL", process.env.REACT_APP_SERVER_URL);
 
   // To access state from inside an event listener we need to manually
   // update a reference as event listeners always refer to initial state
