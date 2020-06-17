@@ -17,7 +17,6 @@ socketApi.io.on("connect", (socket) => {
 });
 
 socketApi.newMessage = (userId, customerId, message) => {
-  console.log("New Message");
   const socket = socketApi.sockets.find((curr) => curr.userId == userId);
   socket.emit("new_message", { customerId, message });
 };
