@@ -37,18 +37,13 @@ _Note: `npm run build` builds the React app for production in the /build folder.
 
 You can register a new user or click the `Demo` button on the login page to see an account with customers and messages.
 
-You can add new numbers in the sidebar (_Note: because this is using a Twilio trial account, any new numbers need to also e added in the Twilio console by me and confirmed with an SMS code_)
+You can add new numbers in the sidebar (_Note: because this is using a Twilio trial account, any new numbers need to also be added in the Twilio console by me and confirmed with an SMS code_)
 
 In the Demo account you can send messages to the existing customers (Picard and Janeway) and the messages will come to me. If I see them I'll reply and you can see the sockets in action!
 
-## Testing
-
-I have written some simple tests (in src/\_\_tests\_\_).
-
-These can be run with `npm run test`
-
 ## What I'd do if I had more time
 
-- Write more tests
+- Write tests
 - Do better error handling and data checking (e.g. you can add invalid phone numbers)
 - Add new unread message markers in the sidebar
+- Handle multiple users having a customer with the same phone number

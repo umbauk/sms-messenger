@@ -68,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
   },
   threadContainer: {
-    height: "100%",
+    height: "90%",
   },
   newContactCard: {
     margin: "2rem",

@@ -121,7 +121,7 @@ const Home = () => {
             menuOpen={menuOpen}
             setMenuOpen={setMenuOpen}
             sidebarWidth={SIDEBAR_WIDTH}
-            pageTitle="Dashboard"
+            pageTitle="Via Messenger"
           />
           <Sidebar
             menuOpen={menuOpen}

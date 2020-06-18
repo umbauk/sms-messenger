@@ -9,8 +9,19 @@ import Home from "Views/Home/Home";
 
 const useStyles = makeStyles({
   "@global": {
+    html: {
+      margin: 0,
+      width: "100%",
+      height: "100%",
+      padding: 0,
+      overflowX: "hidden",
+    },
     body: {
       margin: 0,
+      width: "100%",
+      height: "100%",
+      padding: 0,
+      overflowX: "hidden",
     },
   },
 });
