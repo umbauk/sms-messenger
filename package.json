@@ -6,7 +6,6 @@
     "predev": "mongod --dbpath=./database &",
     "dev": "nodemon ./bin/www",
     "debug": "nodemon  --inspect ./bin/www",
-    "test": "NODE_ENV=test ./node_modules/.bin/mocha --exit --timeout 30000",
     "start": "node ./bin/www",
     "stop": "mongo admin --eval \"db.shutdownServer()\"",
     "heroku-postbuild": "cd client && npm install && npm run build"

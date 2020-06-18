@@ -1,3 +1,7 @@
+/*
+ * Renders new message input at bottom of screen
+ */
+
 import React, { useState } from "react";
 import { makeStyles, Grid, Paper, TextField } from "@material-ui/core";
 import { Send } from "@material-ui/icons";

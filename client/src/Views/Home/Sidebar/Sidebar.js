@@ -1,3 +1,8 @@
+/*
+ * Parent Sidebar component containing Threads and NewContact button.
+ * Sorts threads by descending date
+ */
+
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {

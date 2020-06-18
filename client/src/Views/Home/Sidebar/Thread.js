@@ -1,3 +1,7 @@
+/*
+ * Renders a customer thread in the sidebar
+ */
+
 import React from "react";
 import {
   makeStyles,

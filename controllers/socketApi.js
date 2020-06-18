@@ -1,3 +1,7 @@
+/*
+ * Handles connections/disconnections to socketServer and emits socket messages
+ */
+
 const io = require("socket.io")();
 const socketServer = { io };
 const cookie = require("cookie");

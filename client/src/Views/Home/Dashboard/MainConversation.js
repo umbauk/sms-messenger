@@ -1,3 +1,7 @@
+/*
+ * Renders main conversation window containing focused conversation
+ */
+
 import React, { useEffect, useRef } from "react";
 import { makeStyles, Grid, Paper, Typography } from "@material-ui/core";
 

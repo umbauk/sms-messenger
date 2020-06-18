@@ -1,3 +1,7 @@
+/*
+ * Button for adding a new contact in the sidebar
+ */
+
 import React, { useState } from "react";
 import {
   Dialog,

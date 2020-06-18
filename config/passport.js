@@ -1,3 +1,7 @@
+/*
+ * Passport middleware for JWT in cookies
+ */
+
 const { Strategy: JwtStrategy, ExtractJwt } = require("passport-jwt");
 
 const secret = require("./config").appSecret;

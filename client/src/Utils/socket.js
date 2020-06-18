@@ -1,3 +1,7 @@
+/*
+ * Establishes connection to the socket server
+ */
+
 import io from "socket.io-client";
 
 const connect = (userId) => {

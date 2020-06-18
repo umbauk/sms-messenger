@@ -1,3 +1,8 @@
+/*
+ * Contains functions for sending and receiving messages to/from Twilio API and
+ * calling function to emit socket messages
+ */
+
 const TWILIO_SID = require("../config/config").twilioSid;
 const TWILIO_AUTH_TOKEN = require("../config/config").twilioAuthToken;
 const TWILIO_PHONE_NO = require("../config/config").twilioPhoneNo;
