@@ -4,7 +4,8 @@ This web app allows users to send and receive SMS messages. It uses Mongo, Expre
 
 - Twilio API integration
 - Realtime updates for new messages via socket.io
-- Authentication of back-end routes using passport.js and JWT in cookies
+- Authentication of back-end routes using passport.js middleware and JWT cookies
+- Authentication of socket connections using JWT cookies
 - Material UI components and JSS styling
 - Mobile responsive
 - Add new contacts, contacts with new messages rise to the top in sidebar, screen auto scrolls down on new messages, date separators for messages on different days, new line preservation in messages, collapsable sidebar with smooth animation

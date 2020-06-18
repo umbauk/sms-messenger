@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
   sendBtn: {
     cursor: "pointer",
-    color: colors.accent,
+    color: colors.logoLight,
     marginLeft: "1rem",
     padding: "1rem",
   },

@@ -100,6 +100,7 @@ const Home = () => {
         newThreads[updatedThreadIndex].messages.push(data.message);
         setThreads(newThreads);
       });
+      return () => context.socket.close();
     }
   }, [context.socket]);
 

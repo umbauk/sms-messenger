@@ -14,6 +14,7 @@ import { Link as RouterLink } from "react-router-dom";
 import StyledButton from "Components/Button/StyledButtonNative";
 import StyledButtonText from "Components/Button/StyledButtonText";
 import AuthUserContext from "Components/Session/AuthUserContext";
+import colors from "Components/Styles/Colors";
 
 import { login } from "Utils/api";
 
@@ -22,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
     marginBottom: theme.spacing(2),
     textAlign: "center",
+    color: colors.white,
   },
   or: {
     paddingBottom: "1rem",

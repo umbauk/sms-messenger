@@ -15,12 +15,14 @@ import { Link as RouterLink } from "react-router-dom";
 import StyledButton from "Components/Button/StyledButtonNative";
 import AuthUserContext from "Components/Session/AuthUserContext";
 import { register } from "Utils/api";
+import colors from "Components/Styles/Colors";
 
 const useStyles = makeStyles((theme) => ({
   submitButton: {
     marginTop: theme.spacing(2),
     marginBottom: theme.spacing(2),
     textAlign: "center",
+    color: colors.white,
   },
 }));
 
