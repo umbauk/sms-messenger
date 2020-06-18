@@ -8,7 +8,7 @@ This web app allows users to send and receive SMS messages. It uses Mongo, Expre
 - Authentication of socket connections using JWT cookies
 - Material UI components and JSS styling
 - Mobile responsive
-- Add new contacts, contacts with new messages rise to the top in sidebar, screen auto scrolls down on new messages, date separators for messages on different days, new line preservation in messages, collapsable sidebar with smooth animation
+- Add new contacts, contacts with new messages rise to the top in sidebar, screen auto scrolls down on new messages, date separators for messages on different days, new line preservation in messages, collapsible sidebar with smooth animation
 - Emojis! 🙄
 
 ## Deployment
