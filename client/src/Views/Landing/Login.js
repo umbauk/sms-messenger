@@ -62,7 +62,6 @@ const Login = () => {
   };
 
   const demoAccount = () => {
-    console.log("Demo");
     setFields({ email: "test@test.com", password: "password" });
   };
 
