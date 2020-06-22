@@ -121,7 +121,7 @@ const Home = () => {
             menuOpen={menuOpen}
             setMenuOpen={setMenuOpen}
             sidebarWidth={SIDEBAR_WIDTH}
-            pageTitle="Via Messenger"
+            pageTitle="SMS Messenger"
           />
           <Sidebar
             menuOpen={menuOpen}

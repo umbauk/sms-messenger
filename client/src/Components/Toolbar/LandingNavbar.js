@@ -1,11 +1,15 @@
 import React from "react";
-import { Grid, makeStyles, AppBar, Toolbar } from "@material-ui/core";
+import {
+  Grid,
+  makeStyles,
+  AppBar,
+  Toolbar,
+  Typography,
+} from "@material-ui/core";
 import { Link } from "react-router-dom";
 
 import StyledButtonOutline from "Components/Button/StyledButtonOutline";
 import colors from "Components/Styles/Colors";
-
-import logo from "Assets/vialogo.svg";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     width: "auto",
   },
   logo: {
-    width: "12rem",
+    color: colors.logoDark,
   },
   [theme.breakpoints.down("xs")]: {
     rootGrid: {
@@ -44,9 +48,9 @@ const LandingNavbar = (props) => {
           className={classes.rootGrid}
         >
           <Grid item>
-            <Link to="/">
-              <img src={logo} className={classes.logo} alt="logo" />
-            </Link>
+            <Typography variant="h3" className={classes.logo}>
+              SMS Messenger
+            </Typography>
           </Grid>
 
           <Grid

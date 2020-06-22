@@ -4,7 +4,6 @@
  */
 
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import {
   makeStyles,
   Drawer,
@@ -20,7 +19,6 @@ import {
 import { ChevronLeft } from "@material-ui/icons";
 
 import colors from "Components/Styles/Colors";
-import logo from "Assets/vialogo.svg";
 import Thread from "Views/Home/Sidebar/Thread";
 import NewContactDialog from "./NewContact";
 
@@ -65,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     padding: theme.spacing(0, 1),
     height: "6rem",
-    justifyContent: "space-between",
+    justifyContent: "flex-end",
   },
   threadContainer: {
     height: "90%",
@@ -146,9 +144,6 @@ const Sidebar = (props) => {
       }}
     >
       <div className={classes.drawerHeader}>
-        <Link to="/">
-          <img src={logo} className={classes.logo} alt="logo" />
-        </Link>
         <IconButton onClick={handleDrawerClose}>
           <ChevronLeft className={classes.chevron} />
         </IconButton>
